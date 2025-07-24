@@ -21,3 +21,18 @@ SentimentSage is a powerful AI-driven platform designed to provide deep insights
 ![2](https://github.com/user-attachments/assets/db02261f-154a-4b5a-9e24-ac9380755a46)
   
 ![3](https://github.com/user-attachments/assets/8a77d1c9-31a9-485f-aa22-fe4c80e012dd)
+
+to deploy the application:
+- Streamlit Cloud
+- Create a new repository on GitHub
+- Upload your files
+- Make sure your repository is public
+- Go to [share.streamlit.io](https://share.streamlit.io)
+- Sign in with GitHub
+- Click "New app"
+- Select your repository
+- Set main file path: `streamlit_app.py`
+- Click "Deploy"
+- Add secrets in the "Secrets" section:
+- OPENAI_API_KEY = "your-openai-key"
+- NEWS_API_KEY = "your-news-api-key"
