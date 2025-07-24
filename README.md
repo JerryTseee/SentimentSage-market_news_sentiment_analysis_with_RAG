@@ -12,3 +12,8 @@ SentimentSage is a powerful AI-driven platform designed to provide deep insights
 - pip install -r requirements.txt
 - run the test.py
 - then you can use the analyze tool, start with input your chosen company ticker
+
+## Software Version
+![1](https://github.com/user-attachments/assets/eec3bc8b-9b3e-4aaa-ac0d-66070c9c983e)
+![2](https://github.com/user-attachments/assets/db02261f-154a-4b5a-9e24-ac9380755a46)
+![3](https://github.com/user-attachments/assets/8a77d1c9-31a9-485f-aa22-fe4c80e012dd)
