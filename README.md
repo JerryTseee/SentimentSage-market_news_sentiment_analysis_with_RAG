@@ -2,7 +2,7 @@
 
 [GitHub](https://github.com/JerryTseee/SentimentSage-market_news_sentiment_analysis_with_RAG.git)
   
-# SentimentSage - Market News Sentiment Analyzer
+# SentimentSage - Market News Sentiment Analyzer 😎
 SentimentSage is a powerful AI-driven platform designed to provide deep insights and analytics on financial news and market sentiment. By leveraging cutting-edge Natural Language Processing (NLP) models like FinBERT, combined with advanced Retrieval-Augmented Generation (RAG) technology, SentimentSage can quickly analyze vast amounts of financial data, extract sentiment, and generate accurate, actionable investment summaries.
 
 - original source code: only includes python code and run it on terminal
