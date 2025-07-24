@@ -10,6 +10,12 @@ from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import CharacterTextSplitter
 import os
 
+"""
+Author: Wangpok Tse
+Email: crazytse@connect.hku.hk
+7/24/2025, Hong Kong SAR
+"""
+
 # Set your API keys
 OPENAI_API_KEY = ""
 NEWS_API_KEY = ""
