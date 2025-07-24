@@ -8,14 +8,14 @@ SentimentSage is a powerful AI-driven platform designed to provide deep insights
 - original source code: only includes python code and run it on terminal
 - software: web-based UI
 
-## Original Source Code
+## Original Source Code 📦
 - register Openai API key and NewsAPI Key
 - replace the api keys on paths in the test.py
 - pip install -r requirements.txt
 - run the test.py
 - then you can use the analyze tool, start with input your chosen company ticker
 
-## Software Version
+## Software Version 🚀
 ![1](https://github.com/user-attachments/assets/eec3bc8b-9b3e-4aaa-ac0d-66070c9c983e)
   
 ![2](https://github.com/user-attachments/assets/db02261f-154a-4b5a-9e24-ac9380755a46)
