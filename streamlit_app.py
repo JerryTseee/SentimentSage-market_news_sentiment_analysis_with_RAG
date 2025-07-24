@@ -15,17 +15,14 @@ import plotly.graph_objects as go
 from datetime import datetime
 import tempfile
 
-# Import API keys from your test.py
-try:
-    from test import OPENAI_API_KEY, NEWS_API_KEY
-    os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
-except ImportError:
-    st.error("Could not import API keys from test.py. Please ensure test.py is in the same directory.")
-    st.stop()
+# Access the API keys from secrets
+OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
+NEWS_API_KEY = st.secrets["NEWS_API_KEY"]
+os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
 # Page configuration
 st.set_page_config(
-    page_title="Financial Sentiment Analyzer",
+    page_title="SentimentSage - Financial Sentiment Analyzer",
     page_icon="📈",
     layout="wide",
     initial_sidebar_state="expanded"
