@@ -1,4 +1,5 @@
-<img width="1024" height="1024" alt="logo" src="https://github.com/user-attachments/assets/9a79ea9c-9cc5-45ca-ac7f-469757921619" />
+<img width="512" height="512" alt="logo" src="https://github.com/user-attachments/assets/9a79ea9c-9cc5-45ca-ac7f-469757921619" />
+
 # SentimentSage - Market News Sentiment Analyzer
 SentimentSage is a powerful AI-driven platform designed to provide deep insights and analytics on financial news and market sentiment. By leveraging cutting-edge Natural Language Processing (NLP) models like FinBERT, combined with advanced Retrieval-Augmented Generation (RAG) technology, SentimentSage can quickly analyze vast amounts of financial data, extract sentiment, and generate accurate, actionable investment summaries.
 
