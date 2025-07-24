@@ -1,4 +1,5 @@
 <img width="300" height="300" alt="logo" src="https://github.com/user-attachments/assets/9a79ea9c-9cc5-45ca-ac7f-469757921619" />
+
 [GitHub](https://github.com/JerryTseee/SentimentSage-market_news_sentiment_analysis_with_RAG.git)
   
 # SentimentSage - Market News Sentiment Analyzer
