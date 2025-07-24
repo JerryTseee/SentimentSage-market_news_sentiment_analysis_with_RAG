@@ -22,7 +22,7 @@ SentimentSage is a powerful AI-driven platform designed to provide deep insights
   
 ![3](https://github.com/user-attachments/assets/8a77d1c9-31a9-485f-aa22-fe4c80e012dd)
 
-to deploy the application:
+to deploy the application to your local:
 - Streamlit Cloud
 - Create a new repository on GitHub
 - Upload your files
