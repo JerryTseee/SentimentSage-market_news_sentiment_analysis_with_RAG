@@ -10,6 +10,7 @@ from langchain_community.document_loaders import TextLoader
 from langchain.text_splitter import CharacterTextSplitter
 import os
 
+
 # Set your API keys
 OPENAI_API_KEY = ""
 NEWS_API_KEY = ""
