@@ -18,6 +18,7 @@ NEWS_API_KEY = ""
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
 
+
 # STEP 1: Get financial news
 def fetch_news(query, api_key=NEWS_API_KEY):
     url = f"https://newsapi.org/v2/everything?q={query}&sortBy=publishedAt&language=en&pageSize=10&apiKey={api_key}"
