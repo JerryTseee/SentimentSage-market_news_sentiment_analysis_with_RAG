@@ -15,6 +15,7 @@ import plotly.graph_objects as go
 from datetime import datetime
 import tempfile
 
+
 # Access the API keys from secrets
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 NEWS_API_KEY = st.secrets["NEWS_API_KEY"]
