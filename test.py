@@ -17,6 +17,25 @@ OPENAI_API_KEY = ""
 NEWS_API_KEY = "49cea536bbb94d0bbe2da2b6c756b96b"
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
+# Use other free LLM model, e.g. Kimi
+
+def get_llm():
+    return ChatOpenAI(
+        model=os.getenv("LLM_MODEL", "gpt-3.5-turbo"),
+        openai_api_key=os.getenv("OPENAI_API_KEY"),
+        openai_api_base=os.getenv("OPENAI_API_BASE", "https://api.openai.com/v1"),
+        temperature=0
+    )
+
+# Kimi as an example
+os.environ["OPENAI_API_KEY"]="your_api_key"                     
+os.environ["OPENAI_API_BASE"] = "https://api.moonshot.cn/v1"
+os.environ["LLM_MODEL"] = "moonshot-v1-8k"
+
+# For Testing: 
+# llm = get_llm()
+# response = llm.invoke("Introduce yourself")
+# print(response.content)
 
 
 # STEP 1: Get financial news
