@@ -32,6 +32,14 @@ os.environ["OPENAI_API_KEY"]="your_api_key"
 os.environ["OPENAI_API_BASE"] = "https://api.moonshot.cn/v1"
 os.environ["LLM_MODEL"] = "moonshot-v1-8k"
 
+try:
+    with open('code-API-key-newsapi.txt', 'r') as f:
+        NEWS_API_KEY = f.read().strip()
+except FileNotFoundError:
+    NEWS_API_KEY = "" # Fallback if file is missing
+
+# Sync with environment for your get_news_api_key() helper
+os.environ["NEWS_API_KEY"] = NEWS_API_KEY
 # For Testing: 
 # llm = get_llm()
 # response = llm.invoke("Introduce yourself")
