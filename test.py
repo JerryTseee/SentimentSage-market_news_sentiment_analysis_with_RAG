@@ -14,7 +14,7 @@ import os
 
 # Set your API keys
 OPENAI_API_KEY = ""
-NEWS_API_KEY = "49cea536bbb94d0bbe2da2b6c756b96b"
+NEWS_API_KEY = ""
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
 # Use other free LLM model, e.g. Kimi
