@@ -4,16 +4,19 @@ import pandas as pd
 from transformers import BertTokenizer, BertForSequenceClassification
 from transformers import pipeline
 import torch
-from langchain.chains import RetrievalQA
+from langchain_classic.chains import create_retrieval_chain
+from langchain_classic.chains.combine_documents import create_stuff_documents_chain
+from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import OpenAI, OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import TextLoader
-from langchain.text_splitter import CharacterTextSplitter
+from langchain_text_splitters import CharacterTextSplitter
 import os
 import plotly.express as px
 import plotly.graph_objects as go
 from datetime import datetime
 import tempfile
+from langchain_nvidia_ai_endpoints import ChatNVIDIA, NVIDIAEmbeddings
 
 
 
@@ -21,6 +24,10 @@ import tempfile
 OPENAI_API_KEY = st.secrets["OPENAI_API_KEY"]
 NEWS_API_KEY = st.secrets["NEWS_API_KEY"]
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+
+#For NVidia AI API Keys
+#NVIDIA_API_KEY = st.secrets["NVIDIA_API_KEY"]
+#os.environ["NVIDIA_API_KEY"] = NVIDIA_API_KEY
 
 # Page configuration
 st.set_page_config(
@@ -112,7 +119,6 @@ def analyze_sentiment(articles, pipe):
 def build_rag_pipeline(articles):
     """Build RAG pipeline for question answering"""
     try:
-        # Create temporary file
         with tempfile.NamedTemporaryFile(mode="w", delete=False, suffix=".txt", encoding="utf-8") as f:
             f.write("\n\n".join(articles))
             temp_file = f.name
@@ -126,16 +132,37 @@ def build_rag_pipeline(articles):
         embeddings = OpenAIEmbeddings()
         db = FAISS.from_documents(docs, embeddings)
 
-        qa_chain = RetrievalQA.from_chain_type(
-            llm=OpenAI(temperature=0),
+        llm = OpenAI(temperature=0)
+
+        #For NVidia API
+        #embeddings = NVIDIAEmbeddings(model="nvidia/nv-embedqa-e5-v5") 
+        
+        #db = FAISS.from_documents(docs, embeddings)
+
+        # --- CHANGE 2: Use NVIDIA Chat Model ---
+        # You can choose models like "meta/llama-3.1-405b-instruct" or "nvidia/nemotron-4-340b-instruct"
+        #llm = ChatNVIDIA(model="meta/llama-3.1-8b-instruct", temperature=0.2)
+        
+        # 定義提示詞模板
+        prompt = ChatPromptTemplate.from_template("""
+        Answer the following question based only on the provided financial news context:
+        <context>
+        {context}
+        </context>
+        Question: {input}
+        """)
+
+        
+        combine_docs_chain = create_stuff_documents_chain(llm, prompt)
+        
+      
+        qa_chain = create_retrieval_chain(
             retriever=db.as_retriever(),
-            return_source_documents=True
+            combine_docs_chain=combine_docs_chain
         )
 
-        # Clean up temporary file
         os.unlink(temp_file)
-        
-        return qa_chain
+        return qa_chain 
     except Exception as e:
         st.error(f"Error building RAG pipeline: {str(e)}")
         return None
@@ -184,9 +211,9 @@ def main():
         
         # Company input
         company = st.text_input(
-            "Enter Company Ticker",
+            "Enter Company/Ticker",
             placeholder="e.g., AAPL, TSLA, GOOGL",
-            help="Enter the stock ticker symbol for the company you want to analyze"
+            help="Enter the company/stock ticker symbol for the company you want to analyze"
         ).strip().upper()
         
         # Analysis options
@@ -199,7 +226,7 @@ def main():
     
     # Main content area
     if not company:
-        st.info("👈 Enter a company ticker in the sidebar to get started!")
+        st.info("👈 Enter a company/ticker in the sidebar to get started!")
         
         # Show example
         st.subheader("📋 How it works:")
@@ -294,7 +321,7 @@ def main():
                     else:
                         return 'background-color: #fff3cd'
                 
-                styled_df = display_df.style.applymap(color_sentiment, subset=['label'])
+                styled_df = display_df.style.map(color_sentiment, subset=['label'])
                 st.dataframe(styled_df, use_container_width=True)
             
             # Step 3: RAG Analysis
@@ -306,18 +333,20 @@ def main():
                     
                     if qa_pipeline:
                         # Use custom question or default
-                        question = f"Can you provide a sentiment analysis and risk summary for {company} based on the news articles? Please give me a detailed analysis."
+                        question = f"Can you provide a sentiment analysis and risk summary for {company} based on the news articles? Please give me a detailed analysis and trading strategies based on last trading date 27/4/2026 about this {company}."
                         
                         try:
-                            result = qa_pipeline.invoke(question)
+                            # CHANGE 1: Pass the question as a dictionary with the key "input"
+                            result = qa_pipeline.invoke({"input": question})
                             
                             st.markdown("### 📝 Summary")
-                            st.write(result['result'])
+                            # CHANGE 2: The new chain outputs the text under 'answer', not 'result'
+                            st.write(result['answer'])
                             
-                            # Show source documents
-                            if 'source_documents' in result and result['source_documents']:
+                            # CHANGE 3: The source documents are now under 'context', not 'source_documents'
+                            if 'context' in result and result['context']:
                                 with st.expander("📚 Source Documents"):
-                                    for i, doc in enumerate(result['source_documents'][:3]):
+                                    for i, doc in enumerate(result['context'][:3]):
                                         st.write(f"**Source {i+1}:** {doc.page_content[:300]}...")
                         
                         except Exception as e:
