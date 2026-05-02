@@ -1,5 +1,6 @@
 """
 Utility functions for the Financial Sentiment Analyzer
+newly added functions
 """
 
 import pandas as pd
