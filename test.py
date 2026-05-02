@@ -18,7 +18,7 @@ NEWS_API_KEY = ""
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 
 # Use other free LLM model, e.g. Kimi
-
+# abondoned original openai api!
 def get_llm():
     return ChatOpenAI(
         model=os.getenv("LLM_MODEL", "gpt-3.5-turbo"),
