@@ -8,6 +8,7 @@ SentimentSage is a powerful AI-driven platform designed to provide deep insights
 - original source code: only includes python code and run it on terminal
 - software: web-based UI
 
+
 ## Original Source Code 📦
 - register Openai API key and NewsAPI Key
 - replace the api keys on paths in the test.py
